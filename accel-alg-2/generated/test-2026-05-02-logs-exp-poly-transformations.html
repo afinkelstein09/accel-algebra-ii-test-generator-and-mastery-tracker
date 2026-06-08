@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A2A Practice Quiz — Logs/Exp + Polynomials + Transformations</title>
+<style>
+  @page {
+    size: letter;
+    margin: 0.6in 0.7in;
+  }
+  html, body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 11.5pt;
+    color: #000;
+    line-height: 1.45;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    font-size: 14pt;
+    text-align: center;
+    margin: 0 0 4pt 0;
+    font-weight: bold;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 11pt;
+    margin: 0 0 4pt 0;
+    font-weight: bold;
+  }
+  .reminder {
+    text-align: center;
+    font-size: 10pt;
+    font-style: italic;
+    margin: 0 0 10pt 0;
+    color: #333;
+  }
+  .name-row {
+    margin-bottom: 12pt;
+    font-size: 11.5pt;
+  }
+  .name-row .line {
+    display: inline-block;
+    border-bottom: 1px solid #000;
+    min-width: 3.5in;
+    height: 1em;
+    vertical-align: bottom;
+  }
+  hr.divider {
+    border: none;
+    border-top: 1px solid #000;
+    margin: 8pt 0;
+  }
+  .question {
+    margin-top: 10pt;
+    margin-bottom: 4pt;
+    page-break-inside: avoid;
+  }
+  .qnum {
+    font-weight: bold;
+    font-size: 12pt;
+  }
+  .stem {
+    font-weight: normal;
+  }
+  .subpart {
+    margin-left: 0.25in;
+    margin-top: 4pt;
+    margin-bottom: 4pt;
+  }
+  .work-space {
+    height: 1.4in;
+    border-bottom: 1px dotted #999;
+    margin-bottom: 2pt;
+  }
+  .work-space.tall {
+    height: 2.2in;
+  }
+  .work-space.short {
+    height: 0.9in;
+  }
+  .grid {
+    width: 3.2in;
+    height: 3.2in;
+    background-image:
+      linear-gradient(to right, #ddd 1px, transparent 1px),
+      linear-gradient(to bottom, #ddd 1px, transparent 1px);
+    background-size: 0.2in 0.2in;
+    border: 1.5px solid #000;
+    position: relative;
+    margin: 6pt 0;
+  }
+  .grid::before, .grid::after {
+    content: "";
+    position: absolute;
+    background: #000;
+  }
+  .grid::before {
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+  }
+  .grid::after {
+    top: 0; bottom: 0; left: 50%;
+    width: 1px;
+  }
+  .answer-line {
+    border-bottom: 1px solid #000;
+    display: inline-block;
+    min-width: 1.8in;
+    height: 1em;
+  }
+  .answer-line.long {
+    min-width: 4in;
+  }
+  .conceptual-label {
+    font-weight: bold;
+    font-style: italic;
+  }
+  ol.transform-list {
+    margin: 4pt 0 4pt 0.5in;
+    padding: 0;
+  }
+  ol.transform-list li {
+    margin-bottom: 2pt;
+  }
+  .footer {
+    margin-top: 18pt;
+    text-align: center;
+    font-size: 10pt;
+    font-style: italic;
+    color: #555;
+  }
+  /* Math typography */
+  .math {
+    font-family: "Cambria Math", "Times New Roman", serif;
+  }
+  sup, sub {
+    font-size: 75%;
+  }
+  /* Print: avoid orphaned question headers */
+  @media print {
+    .question { page-break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+</style>
+</head>
+<body>
+
+<h1>A2A Practice Quiz — Logs/Exp + Polynomials + Transformations</h1>
+<p class="subtitle">No calculator — you must fully justify all answers to receive full credit.</p>
+<p class="reminder">Reminder: a correct answer with little/no work caps at a D. Show your work.</p>
+
+<p class="name-row"><strong>Name:</strong> <span class="line"></span></p>
+
+<hr class="divider">
+
+<!-- Q1 -->
+<div class="question">
+<p><span class="qnum">1.</span> <span class="stem">Simplify each expression. Write your answers with positive exponents only.</span></p>
+
+<div class="subpart">
+  <strong>a.</strong> <span class="math">(2a<sup>3</sup>b<sup>−2</sup>)<sup>3</sup> · (4a<sup>−2</sup>b)<sup>−1</sup></span>
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> <span class="math">log<sub>2</sub>(32x<sup>4</sup>) − log<sub>2</sub>(2x)</span>
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> <span class="math">log<sub>5</sub>(125) + log<sub>5</sub>(1/25) − log<sub>5</sub>(√5)</span>
+  <div class="work-space"></div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q2 -->
+<div class="question">
+<p><span class="qnum">2.</span> <span class="stem">Solve the following equations exactly.</span></p>
+
+<div class="subpart">
+  <strong>a.</strong> <span class="math">9<sup>2x−1</sup> = 27<sup>x+2</sup></span>
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> <span class="math">4<sup>x</sup> · 8<sup>x−1</sup> = 2<sup>7</sup></span>
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> <span class="math">2<sup>x+1</sup> = 5</span>
+  <div class="work-space"></div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q3 -->
+<div class="question">
+<p><span class="qnum">3.</span> <span class="stem">Sketch the polynomial below and provide the requested information. Label any points you use.</span></p>
+
+<p style="text-align:center; font-size:13pt; margin:6pt 0;" class="math">
+f(x) = −(1/3)(x+2)<sup>2</sup>(x−1)(x−3)
+</p>
+
+<div class="subpart"><strong>a.</strong> Degree: <span class="answer-line"></span></div>
+<div class="subpart"><strong>b.</strong> Leading coefficient: <span class="answer-line"></span></div>
+<div class="subpart"><strong>c.</strong> End behavior: <span class="answer-line long"></span></div>
+<div class="subpart"><strong>d.</strong> Y-intercept: <span class="answer-line"></span></div>
+
+<div class="subpart">
+  <strong>e.</strong> Sketch (label all zeros, multiplicities, and y-intercept):
+  <div class="grid"></div>
+</div>
+
+<div class="subpart">
+  <strong>f.</strong> Intervals where f(x) &gt; 0:
+  <div class="work-space short"></div>
+</div>
+
+<div class="subpart">
+  <strong>g.</strong> Solve f(−x) &gt; 0:
+  <div class="work-space"></div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q4 -->
+<div class="question">
+<p><span class="qnum">4.</span> <span class="stem">Write the equation of a degree 4 polynomial with zeros at <span class="math">−2 and 1 + 2i</span>, only <strong>rational coefficients</strong>, and a y-intercept of <span class="math">20</span>.</span></p>
+<div class="work-space tall"></div>
+</div>
+
+<hr class="divider">
+
+<!-- Q5 -->
+<div class="question">
+<p><span class="qnum">5.</span> <span class="stem">Find all roots of <span class="math">h(x) = 2x<sup>3</sup> − 3x<sup>2</sup> − 11x + 6</span>, given that <span class="math">h(−2) = 0</span>.</span></p>
+<div class="work-space tall"></div>
+</div>
+
+<hr class="divider">
+
+<!-- Q6 -->
+<div class="question">
+<p><span class="qnum">6.</span> <span class="stem">Solve each equation. Identify any extraneous solutions.</span></p>
+
+<div class="subpart">
+  <strong>a.</strong> <span class="math">log(x) + log(x + 3) = 1</span>
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> <span class="math">log<sub>2</sub>(x + 6) − log<sub>2</sub>(x − 1) = 3</span>
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> <span class="conceptual-label">Conceptual.</span> For <span class="math">log<sub>b</sub>(x) = −3</span> where <span class="math">b &gt; 1</span>, is <span class="math">x</span> greater than 1, less than 1, or equal to 1? Justify your answer using the definition of a logarithm.
+  <div class="work-space"></div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q7 -->
+<div class="question">
+<p><span class="qnum">7.</span> <span class="stem">Graph each function. For each part: (i) <strong>rewrite in a more convenient form</strong> if helpful, (ii) sketch the graph and label at least <strong>3 points</strong> and the <strong>asymptote</strong>, (iii) state the <strong>domain</strong> and <strong>range</strong>.</span></p>
+
+<div class="subpart">
+  <strong>a.</strong> <span class="math">h(x) = 3 · (1/2)<sup>x−1</sup> + 1</span>
+  <div style="display:flex; gap:14px; align-items:flex-start; margin-top: 6pt;">
+    <div style="flex: 1;">
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Rewrite / work:</em></div>
+      <div class="work-space"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Domain:</em></div>
+      <div class="work-space short" style="height: 0.5in;"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Range:</em></div>
+      <div class="work-space short" style="height: 0.5in;"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Asymptote:</em></div>
+      <div class="work-space short" style="height: 0.5in;"></div>
+    </div>
+    <div class="grid" style="flex-shrink: 0;"></div>
+  </div>
+</div>
+
+<div class="subpart" style="margin-top: 12pt;">
+  <strong>b.</strong> <span class="math">f(x) = −log<sub>2</sub>(x + 4) + 1</span>
+  <div style="display:flex; gap:14px; align-items:flex-start; margin-top: 6pt;">
+    <div style="flex: 1;">
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Rewrite / work:</em></div>
+      <div class="work-space"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Domain:</em></div>
+      <div class="work-space short" style="height: 0.5in;"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Range:</em></div>
+      <div class="work-space short" style="height: 0.5in;"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Asymptote:</em></div>
+      <div class="work-space short" style="height: 0.5in;"></div>
+    </div>
+    <div class="grid" style="flex-shrink: 0;"></div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q8 -->
+<div class="question">
+<p><span class="qnum">8.</span> <span class="stem">Application — radioactive decay.</span></p>
+
+<p>A radioactive isotope has a <strong>half-life of 4 years</strong>. A sample contains 80 grams initially.</p>
+
+<div class="subpart">
+  <strong>a.</strong> Write an equation <span class="math">A(t)</span> for the amount of the isotope remaining (in grams) after <span class="math">t</span> years.
+  <div class="work-space short"></div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> How much of the sample remains after 12 years?
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> After how many years will only 5 grams remain? Solve exactly.
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>d.</strong> Hugo claims the sample will eventually decay to 0 grams. Is he correct? Justify your answer mathematically.
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>e.</strong> Find the <strong>exact yearly decay rate</strong> of this isotope. (Express your answer as a constant — no decimals.)
+  <div class="work-space"></div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q9 - Compound Interest -->
+<div class="question">
+<p><span class="qnum">9.</span> <span class="stem"><strong>Compound interest application.</strong></span></p>
+
+<p>Hugo invests <span class="math">$4,000</span> in an account that pays <span class="math">6%</span> annual interest, <strong>compounded quarterly</strong>.</p>
+
+<div class="subpart">
+  <strong>a.</strong> Write an equation <span class="math">A(t)</span> for the value of the account after <span class="math">t</span> years.
+  <div class="work-space short"></div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> How much will the account be worth after 5 years? Leave your answer in <strong>exact form</strong>.
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> After how many years will the investment double (reach <span class="math">$8,000</span>)? Solve exactly using logs.
+  <div class="work-space tall"></div>
+</div>
+
+<div class="subpart">
+  <strong>d.</strong> Hugo's friend Frank wants to also reach <span class="math">$8,000</span> in 5 years, starting from <span class="math">$4,000</span>, but in an account compounded <strong>annually</strong>. What annual interest rate <span class="math">r</span> would Frank need? Solve exactly.
+  <div class="work-space tall"></div>
+</div>
+</div>
+
+<hr class="divider" style="border-top: 2px solid #000; margin: 18pt 0 10pt 0;">
+
+<h1 style="font-size: 13pt;">Throwback Section</h1>
+<p class="reminder" style="margin-bottom: 12pt;">Spiraled review — topics from earlier units that may show up again. Same rules: no calculator, justify everything.</p>
+
+<!-- Q10 - Complex Numbers throwback -->
+<div class="question">
+<p><span class="qnum">10.</span> <span class="stem"><strong>Complex numbers.</strong> Write in standard complex form (a + bi):</span></p>
+<p style="text-align:center; font-size:13pt; margin:6pt 0;" class="math">
+i<sup>100</sup> − 3i<sup>15</sup> + <span style="display:inline-block; vertical-align:middle;">
+  <span style="display:block; border-bottom:1px solid #000; padding:0 6pt;">2 + i</span>
+  <span style="display:block; padding:0 6pt;">3 − i</span>
+</span>
+</p>
+<div class="work-space tall"></div>
+</div>
+
+<hr class="divider">
+
+<!-- Q11 - Functions / inverses throwback -->
+<div class="question">
+<p><span class="qnum">11.</span> <span class="stem"><strong>Functions and inverses.</strong> Find <span class="math">f<sup>−1</sup>(x)</span> for the following function:</span></p>
+<p style="text-align:center; font-size:13pt; margin:6pt 0;" class="math">
+f(x) = <span style="display:inline-block; vertical-align:middle;">
+  <span style="display:block; border-bottom:1px solid #000; padding:0 6pt;">3x + 2</span>
+  <span style="display:block; padding:0 6pt;">x − 4</span>
+</span>
+</p>
+<div class="work-space tall"></div>
+</div>
+
+<hr class="divider">
+
+<!-- Q12 - Quadratics throwback (word problem) -->
+<div class="question">
+<p><span class="qnum">12.</span> <span class="stem"><strong>Quadratics application.</strong> Frank is building a rectangular garden against the side of his barn. He has 24 feet of fencing and only needs to fence three sides (the barn wall serves as the fourth side).</span></p>
+
+<div class="subpart">
+  <strong>a.</strong> Let <span class="math">x</span> be the length of the side perpendicular to the barn. Write a quadratic <span class="math">A(x)</span> for the area of the garden.
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> What dimensions give the maximum area? (Justify — guess and check will receive no credit.)
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> What is the maximum area?
+  <div class="work-space short"></div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q13 - Algebra simplification throwback -->
+<div class="question">
+<p><span class="qnum">13.</span> <span class="stem"><strong>Algebra.</strong> Simplify completely. State any restrictions on <span class="math">x</span>.</span></p>
+<p style="text-align:center; font-size:13pt; margin:6pt 0;" class="math">
+<span style="display:inline-block; vertical-align:middle;">
+  <span style="display:block; border-bottom:1px solid #000; padding:0 6pt;">x<sup>2</sup> − 9</span>
+  <span style="display:block; padding:0 6pt;">x<sup>2</sup> − x − 6</span>
+</span>
+&nbsp;÷&nbsp;
+<span style="display:inline-block; vertical-align:middle;">
+  <span style="display:block; border-bottom:1px solid #000; padding:0 6pt;">x<sup>2</sup> + 5x + 6</span>
+  <span style="display:block; padding:0 6pt;">x<sup>2</sup> − 4</span>
+</span>
+</p>
+<div class="work-space tall"></div>
+</div>
+
+<p class="footer">End of practice quiz. Bring your work back for grading.</p>
+
+</body>
+</html>

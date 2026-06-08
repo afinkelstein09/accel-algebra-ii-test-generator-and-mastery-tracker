@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Accel Alg II — Mastery Tracker</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+    background: #f7f7f5;
+    color: #1a1a1a;
+  }
+  h1 { margin-bottom: 4px; }
+  .subtitle { color: #666; margin-top: 0; margin-bottom: 24px; font-size: 14px; }
+  .summary {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .summary h2 { margin-top: 0; font-size: 16px; }
+  .summary table { width: 100%; border-collapse: collapse; }
+  .summary th, .summary td {
+    text-align: left;
+    padding: 6px 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+  .summary th { background: #fafafa; font-weight: 600; }
+  table.tracker {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  table.tracker th {
+    background: #2a2a2a;
+    color: white;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  table.tracker th:hover { background: #3a3a3a; }
+  table.tracker th.sorted-asc::after { content: " ▲"; opacity: 0.7; }
+  table.tracker th.sorted-desc::after { content: " ▼"; opacity: 0.7; }
+  table.tracker td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+  table.tracker tr:last-child td { border-bottom: none; }
+  table.tracker tr:hover td { background: #f9f9f7; }
+  .grade {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 13px;
+    min-width: 28px;
+    text-align: center;
+  }
+  .g-A { background: #d4f4dd; color: #0a5424; }
+  .g-Aminus { background: #e2f5e2; color: #0d6b2a; }
+  .g-Bplus { background: #d9e9f7; color: #1a5490; }
+  .g-B { background: #e2eef7; color: #2a6db8; }
+  .g-Bminus { background: #ebf3f8; color: #3878b8; }
+  .g-Cplus { background: #fbe9c9; color: #8a5a14; }
+  .g-C { background: #fce5b8; color: #8c5616; }
+  .g-Cminus { background: #fce0a8; color: #8e521a; }
+  .g-Dplus, .g-D, .g-Dminus { background: #f9d0cc; color: #832218; }
+  .g-F { background: #f5b8b1; color: #6b1812; }
+  .g-Unknown { background: #eee; color: #999; font-style: italic; }
+  .type-real { color: #1a5490; font-weight: 500; }
+  .type-practice { color: #8a5a14; font-weight: 500; }
+  .legend {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
+  }
+  .legend code {
+    background: #eee;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .filter-row {
+    margin-bottom: 12px;
+  }
+  .filter-row label {
+    font-size: 13px;
+    margin-right: 12px;
+  }
+  .filter-row select {
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+</style>
+</head>
+<body>
+
+<h1>Accel Alg II — Mastery Tracker</h1>
+<p class="subtitle">Click any column header to sort. Real quiz grades + future practice-test grades will appear here.</p>
+
+<div class="summary">
+  <h2>Current mastery per topic (real quizzes only)</h2>
+  <p style="font-size: 12px; color: #777; margin: -4px 0 10px 0;">
+    Approximate 65/35 weighted formula based on section letter grades. <strong>Canvas is the source of truth</strong> — its mastery comes from the per-question C/S/D/M/N codes, not the section letters, so this estimate may be off by a letter grade in either direction.
+  </p>
+  <table id="summary-table">
+    <thead>
+      <tr><th>Topic</th><th>Current mastery</th><th># of grades</th><th>Trend</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<div class="filter-row">
+  <label>Type:
+    <select id="filter-type">
+      <option value="all">All</option>
+      <option value="real">Real quiz only</option>
+      <option value="practice">Practice only</option>
+    </select>
+  </label>
+  <label>Topic:
+    <select id="filter-topic">
+      <option value="all">All</option>
+    </select>
+  </label>
+</div>
+
+<table class="tracker" id="grades-table">
+  <thead>
+    <tr>
+      <th data-key="quiz" data-type="num">Quiz</th>
+      <th data-key="topic">Topic</th>
+      <th data-key="grade" data-type="grade">Grade</th>
+      <th data-key="type">Type</th>
+      <th data-key="notes">Notes</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<p class="legend">
+  <strong>Type:</strong> <code>real</code> = actual graded quiz from class. <code>practice</code> = grade Claude gave you on a /mathtest practice test.
+  <br>
+  <strong>Trend:</strong> ↑ = improving across recent grades, ↓ = slipping, → = steady.
+</p>
+
+<script>
+// Master grade data — append new entries here. New rows added by /mathtest will go at the bottom.
+const grades = [
+  // Quiz 1 (Quadratics + Complex + Algebra + Functions)
+  { quiz: 1, topic: "Complex Numbers", grade: "A",  type: "real", notes: "" },
+  { quiz: 1, topic: "Algebra",         grade: "B+", type: "real", notes: "" },
+  { quiz: 1, topic: "Quadratics",      grade: "A-", type: "real", notes: "" },
+  { quiz: 1, topic: "Functions",       grade: "B+", type: "real", notes: "" },
+
+  // Quiz 2 (cumulative through polynomials)
+  { quiz: 2, topic: "Algebra",         grade: "B",  type: "real", notes: "" },
+  { quiz: 2, topic: "Functions",       grade: "C",  type: "real", notes: "weak spot" },
+  { quiz: 2, topic: "Quadratics",      grade: "A",  type: "real", notes: "" },
+  { quiz: 2, topic: "Polynomials",     grade: "B",  type: "real", notes: "" },
+
+  // Quiz 3 (functions inverses + polynomials + algebra + complex)
+  { quiz: 3, topic: "Algebra",         grade: "C+", type: "real", notes: "" },
+  { quiz: 3, topic: "Complex Numbers", grade: "B",  type: "real", notes: "" },
+  { quiz: 3, topic: "Functions",       grade: "B",  type: "real", notes: "" },
+  { quiz: 3, topic: "Polynomials",     grade: "B",  type: "real", notes: "" },
+
+  // Quiz 4 (mini exponents quiz)
+  { quiz: 4, topic: "Exponents",       grade: "A",  type: "real", notes: "mini quiz" },
+
+  // Quiz 5 (logs/exp + functions + transformations + quadratics)
+  { quiz: 5, topic: "Transformations", grade: "A",  type: "real", notes: "" },
+  { quiz: 5, topic: "Functions",       grade: "A",  type: "real", notes: "" },
+  { quiz: 5, topic: "Quadratics",      grade: "B-", type: "real", notes: "" },
+  { quiz: 5, topic: "Exponents",       grade: "A-", type: "real", notes: "" },
+  { quiz: 5, topic: "Logs",            grade: "A-", type: "real", notes: "" },
+];
+
+// Grade → numeric for sorting/averaging
+const gradeValue = {
+  "A+": 12, "A": 11, "A-": 10,
+  "B+": 9,  "B": 8,  "B-": 7,
+  "C+": 6,  "C": 5,  "C-": 4,
+  "D+": 3,  "D": 2,  "D-": 1,
+  "F":  0,  "?":   null,
+};
+
+// Numeric → letter for averages
+function numToLetter(n) {
+  if (n === null || isNaN(n)) return "?";
+  const rounded = Math.round(n);
+  for (const [letter, val] of Object.entries(gradeValue)) {
+    if (val === rounded) return letter;
+  }
+  // fallback: nearest
+  let best = "F", bestDiff = 99;
+  for (const [letter, val] of Object.entries(gradeValue)) {
+    if (val === null) continue;
+    const diff = Math.abs(val - n);
+    if (diff < bestDiff) { bestDiff = diff; best = letter; }
+  }
+  return best;
+}
+
+function gradeClass(grade) {
+  return "g-" + grade.replace("+", "plus").replace("-", "minus").replace("?", "Unknown");
+}
+
+let currentSort = { key: "quiz", dir: "asc" };
+
+function renderTable() {
+  const filterType = document.getElementById("filter-type").value;
+  const filterTopic = document.getElementById("filter-topic").value;
+
+  let rows = grades.filter(g => {
+    if (filterType !== "all" && g.type !== filterType) return false;
+    if (filterTopic !== "all" && g.topic !== filterTopic) return false;
+    return true;
+  });
+
+  // sort
+  const k = currentSort.key;
+  const t = document.querySelector(`th[data-key="${k}"]`)?.dataset.type || "str";
+  rows.sort((a, b) => {
+    let av = a[k], bv = b[k];
+    if (t === "num") { av = +av; bv = +bv; }
+    else if (t === "grade") { av = gradeValue[av] ?? -1; bv = gradeValue[bv] ?? -1; }
+    else { av = String(av).toLowerCase(); bv = String(bv).toLowerCase(); }
+    if (av < bv) return currentSort.dir === "asc" ? -1 : 1;
+    if (av > bv) return currentSort.dir === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  const tbody = document.querySelector("#grades-table tbody");
+  tbody.innerHTML = rows.map(g => `
+    <tr>
+      <td>${g.quiz}</td>
+      <td>${g.topic}</td>
+      <td><span class="grade ${gradeClass(g.grade)}">${g.grade}</span></td>
+      <td class="type-${g.type}">${g.type}</td>
+      <td>${g.notes || ""}</td>
+    </tr>
+  `).join("");
+
+  // header indicators
+  document.querySelectorAll("th").forEach(th => th.classList.remove("sorted-asc", "sorted-desc"));
+  const activeTh = document.querySelector(`th[data-key="${k}"]`);
+  if (activeTh) activeTh.classList.add(currentSort.dir === "asc" ? "sorted-asc" : "sorted-desc");
+}
+
+function renderSummary() {
+  const real = grades.filter(g => g.type === "real" && gradeValue[g.grade] !== null);
+  const byTopic = {};
+  for (const g of real) {
+    if (!byTopic[g.topic]) byTopic[g.topic] = [];
+    byTopic[g.topic].push({ quiz: g.quiz, val: gradeValue[g.grade] });
+  }
+  const tbody = document.querySelector("#summary-table tbody");
+  const rows = Object.entries(byTopic)
+    .map(([topic, entries]) => {
+      const sorted = entries.sort((a,b) => a.quiz - b.quiz);
+      // 65/35 rolling weighted mastery — first quiz seeds it, each subsequent quiz updates it
+      let mastery = sorted[0].val;
+      for (let i = 1; i < sorted.length; i++) {
+        mastery = 0.65 * sorted[i].val + 0.35 * mastery;
+      }
+      // trend: compare prior mastery (before last quiz) to current mastery
+      let trend = "→";
+      if (sorted.length >= 2) {
+        let priorMastery = sorted[0].val;
+        for (let i = 1; i < sorted.length - 1; i++) {
+          priorMastery = 0.65 * sorted[i].val + 0.35 * priorMastery;
+        }
+        const delta = mastery - priorMastery;
+        if (delta >= 1)       trend = "↑";
+        else if (delta <= -1) trend = "↓";
+      }
+      return { topic, mastery, count: sorted.length, trend };
+    })
+    .sort((a,b) => b.mastery - a.mastery); // best topics first
+  tbody.innerHTML = rows.map(r => `
+    <tr>
+      <td>${r.topic}</td>
+      <td><span class="grade ${gradeClass(numToLetter(r.mastery))}">${numToLetter(r.mastery)}</span></td>
+      <td>${r.count}</td>
+      <td style="font-size:18px;">${r.trend}</td>
+    </tr>
+  `).join("");
+}
+
+function populateTopicFilter() {
+  const topics = [...new Set(grades.map(g => g.topic))].sort();
+  const sel = document.getElementById("filter-topic");
+  for (const t of topics) {
+    const opt = document.createElement("option");
+    opt.value = t; opt.textContent = t;
+    sel.appendChild(opt);
+  }
+}
+
+document.querySelectorAll("th[data-key]").forEach(th => {
+  th.addEventListener("click", () => {
+    const k = th.dataset.key;
+    if (currentSort.key === k) currentSort.dir = currentSort.dir === "asc" ? "desc" : "asc";
+    else { currentSort.key = k; currentSort.dir = "asc"; }
+    renderTable();
+  });
+});
+
+document.getElementById("filter-type").addEventListener("change", renderTable);
+document.getElementById("filter-topic").addEventListener("change", renderTable);
+
+populateTopicFilter();
+renderTable();
+renderSummary();
+</script>
+
+</body>
+</html>

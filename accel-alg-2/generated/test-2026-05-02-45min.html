@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A2A Practice Quiz — 45-min version (Logs/Exp + Polynomials + Transformations)</title>
+<style>
+  @page { size: letter; margin: 0.6in 0.7in; }
+  html, body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 11.5pt;
+    color: #000;
+    line-height: 1.45;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    font-size: 14pt;
+    text-align: center;
+    margin: 0 0 4pt 0;
+    font-weight: bold;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 11pt;
+    margin: 0 0 4pt 0;
+    font-weight: bold;
+  }
+  .reminder {
+    text-align: center;
+    font-size: 10pt;
+    font-style: italic;
+    margin: 0 0 10pt 0;
+    color: #333;
+  }
+  .name-row { margin-bottom: 12pt; font-size: 11.5pt; }
+  .name-row .line {
+    display: inline-block;
+    border-bottom: 1px solid #000;
+    min-width: 3.5in;
+    height: 1em;
+    vertical-align: bottom;
+  }
+  hr.divider { border: none; border-top: 1px solid #000; margin: 8pt 0; }
+  .question { margin-top: 10pt; margin-bottom: 4pt; page-break-inside: avoid; }
+  .qnum { font-weight: bold; font-size: 12pt; }
+  .stem { font-weight: normal; }
+  .subpart { margin-left: 0.25in; margin-top: 4pt; margin-bottom: 4pt; }
+  .work-space { height: 1.4in; border-bottom: 1px dotted #999; margin-bottom: 2pt; }
+  .work-space.tall { height: 2.0in; }
+  .work-space.short { height: 0.8in; }
+  .grid {
+    width: 3.0in;
+    height: 3.0in;
+    background-image:
+      linear-gradient(to right, #ddd 1px, transparent 1px),
+      linear-gradient(to bottom, #ddd 1px, transparent 1px);
+    background-size: 0.2in 0.2in;
+    border: 1.5px solid #000;
+    position: relative;
+    margin: 6pt 0;
+  }
+  .grid::before, .grid::after { content: ""; position: absolute; background: #000; }
+  .grid::before { left: 0; right: 0; top: 50%; height: 1px; }
+  .grid::after { top: 0; bottom: 0; left: 50%; width: 1px; }
+  .answer-line { border-bottom: 1px solid #000; display: inline-block; min-width: 1.8in; height: 1em; }
+  .math { font-family: "Cambria Math", "Times New Roman", serif; }
+  sup, sub { font-size: 75%; }
+  .footer {
+    margin-top: 18pt;
+    text-align: center;
+    font-size: 10pt;
+    font-style: italic;
+    color: #555;
+  }
+  .timer-banner {
+    background: #fff5dc;
+    border: 1px solid #d4a700;
+    padding: 6pt 10pt;
+    text-align: center;
+    margin: 6pt 0 12pt 0;
+    font-size: 11pt;
+  }
+  @media print {
+    .question { page-break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+</style>
+</head>
+<body>
+
+<h1>A2A Practice Quiz — 45-min version</h1>
+<p class="subtitle">Logs/Exp + Polynomials + Transformations</p>
+<p class="subtitle">No calculator — you must fully justify all answers to receive full credit.</p>
+<p class="reminder">Reminder: a correct answer with little/no work caps at a D. Show your work.</p>
+
+<p class="timer-banner">⏱ Timed practice: <strong>45 minutes</strong>. 5 questions, ~9 min each. Stop when time runs out and note where you were.</p>
+
+<p class="name-row"><strong>Name:</strong> <span class="line"></span> &nbsp;&nbsp; <strong>Start time:</strong> <span class="line" style="min-width: 1.5in;"></span></p>
+
+<hr class="divider">
+
+<!-- Q1 - Solve exponential and log equations exactly (mixed) -->
+<div class="question">
+<p><span class="qnum">1.</span> <span class="stem">Solve each equation <strong>exactly</strong>.</span></p>
+
+<div class="subpart">
+  <strong>a.</strong> <span class="math">9<sup>2x−1</sup> = 27<sup>x+2</sup></span>
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> <span class="math">2<sup>x+1</sup> = 5</span>
+  <div class="work-space"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> <span class="math">log<sub>2</sub>(x + 6) − log<sub>2</sub>(x − 1) = 3</span> &nbsp; (Identify any extraneous solutions.)
+  <div class="work-space"></div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q2 - Reverse-engineer polynomial -->
+<div class="question">
+<p><span class="qnum">2.</span> <span class="stem">Write the equation of a degree 4 polynomial with zeros at <span class="math">−2 and 1 + 2i</span>, only <strong>rational coefficients</strong>, and a y-intercept of <span class="math">20</span>.</span></p>
+<div class="work-space tall"></div>
+</div>
+
+<hr class="divider">
+
+<!-- Q3 - Find all roots given one -->
+<div class="question">
+<p><span class="qnum">3.</span> <span class="stem">Find all roots of <span class="math">h(x) = 2x<sup>3</sup> − 3x<sup>2</sup> − 11x + 6</span>, given that <span class="math">h(−2) = 0</span>.</span></p>
+<div class="work-space tall"></div>
+</div>
+
+<hr class="divider">
+
+<!-- Q4 - Graph log function + find inverse -->
+<div class="question">
+<p><span class="qnum">4.</span> <span class="stem">For the function below:</span></p>
+
+<p style="text-align:center; font-size:13pt; margin:6pt 0;" class="math">
+f(x) = −log<sub>2</sub>(x + 4) + 1
+</p>
+
+<div class="subpart">
+  <strong>a.</strong> <strong>Rewrite</strong> in a more convenient form if helpful, then <strong>sketch</strong> the graph labeling at least 3 points and the asymptote. State the <strong>domain, range, and asymptote equation</strong>.
+  <div style="display:flex; gap:14px; align-items:flex-start; margin-top: 6pt;">
+    <div style="flex: 1;">
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Rewrite / work:</em></div>
+      <div class="work-space"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Domain:</em></div>
+      <div class="work-space short" style="height: 0.45in;"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Range:</em></div>
+      <div class="work-space short" style="height: 0.45in;"></div>
+      <div style="font-size: 11px; color: #666; margin-bottom: 2pt;"><em>Asymptote:</em></div>
+      <div class="work-space short" style="height: 0.45in;"></div>
+    </div>
+    <div class="grid" style="flex-shrink: 0;"></div>
+  </div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> Find <span class="math">f<sup>−1</sup>(x)</span> algebraically. (The inverse of a log is an exponential.)
+  <div class="work-space tall"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> State the <strong>domain and range of <span class="math">f<sup>−1</sup>(x)</span></strong>, and the equation of <strong>its</strong> asymptote. (Hint: domain and range swap.)
+  <div class="work-space"></div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- Q5 - Compound interest application -->
+<div class="question">
+<p><span class="qnum">5.</span> <span class="stem"><strong>Compound interest application.</strong></span></p>
+
+<p>Hugo invests <span class="math">$4,000</span> in an account that pays <span class="math">6%</span> annual interest, <strong>compounded quarterly</strong>.</p>
+
+<div class="subpart">
+  <strong>a.</strong> Write an equation <span class="math">A(t)</span> for the value of the account after <span class="math">t</span> years.
+  <div class="work-space short"></div>
+</div>
+
+<div class="subpart">
+  <strong>b.</strong> After how many years will the investment double (reach <span class="math">$8,000</span>)? Solve exactly using logs.
+  <div class="work-space tall"></div>
+</div>
+
+<div class="subpart">
+  <strong>c.</strong> Hugo's friend Frank wants to also reach <span class="math">$8,000</span> in 5 years, starting from <span class="math">$4,000</span>, but in an account compounded <strong>annually</strong>. What annual interest rate <span class="math">r</span> would Frank need? Solve exactly.
+  <div class="work-space tall"></div>
+</div>
+</div>
+
+<p class="footer">End of 45-min practice. Note your stop time. Bring your work back for grading.</p>
+
+</body>
+</html>

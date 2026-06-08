@@ -1,149 +1,86 @@
-# Accel Algebra II — Test Generator & Mastery Tracker
+# 📝 mathtest — A Teacher-Style Practice Test Generator
 
-A personal study system for my Accelerated Algebra II class. It learns the *style* of
-my class's past quizzes and generates **original** practice tests that feel like the
-real thing — then grades my attempts with the same rubric my teacher uses and tracks
-which learning targets I've actually mastered over time.
+A personal Claude Code skill that generates style-matched practice tests for a specific
+high school math class by learning from past quizzes, then grades attempts using the
+teacher's rubric and tracks mastery over time.
 
-It is not a copy of any answer key. It generates new problems in the teacher's format
-so I can practice under realistic conditions before an assessment.
+## The problem
 
----
+Generic practice problems don't match how individual teachers actually write tests. My
+Accelerated Algebra II teacher (Mr. Wallis) has a distinctive style — conjugate-pair
+traps, "use your answer above" chain questions, optimization word problems with silly
+named characters, a "no calculator / no `e` / no `ln`" constraint, multi-part questions
+with conceptual sub-prompts. Studying generic problems from a textbook leaves you
+unprepared for the style of the actual quiz.
 
-## The idea
+## What it does
 
-Most practice problems don't match how my class is actually assessed — wrong format,
-wrong difficulty, calculators allowed when mine aren't, decimals accepted when my
-teacher demands exact form. So instead of generic worksheets, this system studies my
-real quizzes and rebuilds *that* experience with fresh problems.
+**Given:**
 
-```
-  past quizzes + teacher's released materials
-                │
-                ▼
-        ┌───────────────┐
-        │  style model  │   →  style-notes.md  (a living "scouting report")
-        └───────────────┘
-                │
-                ▼
-        generate practice test  ──►  take it on paper
-                │                          │
-                ▼                          ▼
-         grade with the class rubric  ◄────┘
-                │
-                ▼
-        mastery-tracker.html  (per-topic mastery over time)
-```
+- Past quizzes (photos, PDFs, or typed) from the teacher
+- A topic list for the upcoming quiz
+- *(Optional)* class problems for the current unit
 
----
+**It produces:**
 
-## What it's "trained" on
+- A practice test that matches the teacher's format, phrasing, difficulty curve, and trick patterns
+- A grading pass on the student's completed attempt using the teacher's **C / S / D / M / N** rubric
+- A diagnostic report identifying specific weak spots and what to drill before quiz day
+- A mastery tracker that mirrors the teacher's spiraled gradebook system
 
-The system isn't a model with weights — the "training data" is my own class material,
-which it reads to build a style profile. Two sources:
+## How it works
 
-1. **My previous quizzes** (`accel-alg-2/past-tests/`) — photos of the real graded
-   quizzes 1–6, including the teacher's red-pen feedback and per-topic letter grades.
-   This is where it learns format, phrasing, difficulty curve, and how work is scored.
-2. **The teacher's released materials** (`accel-alg-2/topic-lists/`, plus stated class
-   policies) — the topic lists handed out before each quiz, the no-calculator rule, the
-   "justify all answers" requirement, and the grading philosophy. These tell it *what's
-   coming* and *how it'll be judged*.
-
-The more quizzes I feed in, the sharper the match. After 2–3 real quizzes the generated
-tests start to feel genuinely like my teacher wrote them.
-
----
-
-## How the "training" works
-
-Every time new material goes in, the system updates **`style-notes.md`** — a living
-scouting report on how this class is assessed. It currently captures things like:
-
-- **Format DNA** — header style (`A2A S2Q#`), 7–8 multi-part questions, name field,
-  no-calculator notice on every quiz.
-- **Signature question types** — reverse-engineering polynomials from constraints,
-  "find all complex zeros," compound-interest with a different unknown each time,
-  optimization word problems with silly named characters.
-- **Trick patterns** — hidden complex-conjugate requirements, double roots stated as
-  words, "solve without same-exponent rules" forcing the log method, a conceptual
-  "would this be positive or negative, and why?" tacked onto a computation.
-- **Hard constraints** — no calculator, no `e` / no `ln`, all answers in exact form
-  (`4000(1.015)^20`, not a decimal).
-- **My weak spots** — across quizzes, *algebra simplification* and *functions/inverses*
-  score lowest, so the generator deliberately over-weights those.
-
-That file is the actual "model." Generated tests are produced from it.
-
----
-
-## The workflow (a walkthrough)
-
-1. **Feed it past tests.** Drop quiz photos into `past-tests/`.
-2. **Add the topic list** for the next quiz into `topic-lists/` (whatever the teacher
-   released).
-3. **Generate** a practice test:
-   ```
-   /mathtest logs, exponentials, and inverses
-   ```
-   A new test lands in `generated/` — no answer key, realistic length and mix:
-   - ~30% close to homework (confidence builders)
-   - ~50% combinations of 2–3 concepts in unfamiliar setups
-   - ~20% harder/applied versions
-4. **Take it on paper**, timed, showing all work (since bare answers don't score well).
-5. **Get graded.** I paste my answers or a photo of my work, and it marks each part,
-   shows full worked solutions, and tells me exactly what to study harder.
-
-See [`accel-alg-2/`](accel-alg-2/) for the live files and its
-[README](accel-alg-2/README.md).
-
----
-
-## Grading — it scores like the class does
-
-My class doesn't use percentages. It uses a **mastery rubric**, and the grader mirrors
-it:
-
-| Code | Meaning |
-|------|---------|
-| **C** | Complete — correct, fully justified, strong grasp |
-| **S** | Substantial — solid grasp, minor slip or detail missing |
-| **D** | Developing — decent understanding, didn't fully land it |
-| **M** | Minimal — some evidence, didn't put it together |
-| **N** | Nothing yet |
-
-Key consequences it respects:
-- A **correct answer with no work shown caps at D** — the work is the point.
-- A **wrong answer with strong work** can still earn S or C.
-- Every attempt is also judged on **precision, clarity, and efficiency**, like the real
-  rubric.
-
----
-
-## Mastery tracking
-
-`accel-alg-2/mastery-tracker.html` maps each topic to a mastery level
-(**Flexible Mastery → Proficient → Developing → Beginning → No data**) and updates as I
-take more practice tests. Because the class **spirals** topics (recent scores weighted
-most), a weak early topic can recover — and the tracker shows whether it actually has.
-
----
-
-## Repo layout
+**Mode A — Generate:**
 
 ```
-accel-alg-2/
-├── README.md            how to use the generator for this class
-├── style-notes.md       the living style model ("training")
-├── mastery-tracker.html the per-topic mastery dashboard
-├── past-tests/          real graded quizzes (input / training data)
-├── topic-lists/         what each upcoming quiz covers (input)
-├── generated/           practice tests + graded versions (output)
-├── class-work/          extra in-class problems fed in for style
-└── taken/               photos of my handwritten attempts (archive)
+/mathtest <topic>
 ```
 
----
+The skill reads all past tests in `past-tests/`, analyzes them against `style-notes.md`
+(an evolving scouting report on the teacher), and produces a practice test in
+`generated/` with the right mix of:
 
-*Built as a personal exam-prep tool. Generated tests contain original problems written
-to match my class's assessment style — they are not reproductions of any test.*
+- ~30% homework-similar problems (confidence builders)
+- ~50% concept combos (2–3 ideas in unfamiliar setups)
+- ~20% harder applied problems / word problems
+
+**Mode B — Grade:** Drop a photo of your attempt. The skill assigns a C/S/D/M/N letter
+per question (matching the teacher's holistic rubric), shows the full worked solution,
+identifies the specific gap, and gives ranked study recommendations.
+
+## Architecture
+
+```
+math-tests/accel-alg-2/
+├── past-tests/         # input: photos/PDFs of real quizzes, organized by quiz #
+├── topic-lists/        # input: what the upcoming quiz will cover
+├── class-work/         # optional input: in-class problems for the current unit
+├── style-notes.md      # auto-updated scouting report on the teacher's style
+├── generated/          # output: practice tests + graded versions
+├── taken/              # archived attempts
+└── mastery-tracker.html  # interactive sortable tracker with 65/35 weighted formula
+                          # matching the teacher's gradebook
+```
+
+The slash command itself lives at `~/.claude/skills/mathtest/SKILL.md`.
+
+## Notable features
+
+- **Style-aware generation** — recognizes signature question patterns (e.g., "rational coefficients only" → conjugate-pair trap on polynomials)
+- **Per-teacher constraints baked in** — no-calculator + no-`e` + no-`ln` means generated answers are always in exact form (`log_(1.015)(2)/4`, `⁵√2 − 1`, etc.)
+- **Mastery tracker with Canvas-verified anchoring** — uses a 65/35 weighted rolling formula (matching the teacher's actual gradebook) and supports Canvas anchor values that override the model's estimate when real data is available
+- **Spiral-aware** — recognizes that old topics will reappear and includes "throwback section" questions in practice tests
+
+## Results
+
+Across one semester of use (Quizzes 1–7 in Accelerated Algebra II):
+
+- Mastery climbed from a starting B+/A− mix to an overall **A− (90.9/100)** at semester end
+- Polynomials jumped from B to A− on the CYO (choose-your-own) final quiz, exactly as predicted from the practice test
+- Identified specific recurring gaps (compound interest formula, rational expression sign tricks) and drilled them before they hit a real quiz
+
+## Tech
+
+- Claude Code skill (Markdown `SKILL.md` + agent instructions)
+- HTML/CSS/JS for the printable test sheets and mastery tracker (no build step — opens directly in browser)
+- macOS `sips` for HEIC → JPEG conversion when feeding in phone photos
